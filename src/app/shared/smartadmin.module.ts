@@ -1,0 +1,63 @@
+import {NgModule, ModuleWithProviders} from "@angular/core";
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {RouterModule} from '@angular/router';
+
+
+import {
+  ModalModule, ButtonsModule, TooltipModule, DropdownModule, ProgressbarModule, AlertModule, TabsModule,
+  AccordionModule, CarouselModule
+} from 'ng2-bootstrap'
+
+import {PopoverModule} from "ng2-popover";
+
+import {SmartadminLayoutModule} from './layout'
+
+import {I18nModule} from "./i18n/i18n.module";
+import {UserModule} from "./user/user.module";
+
+import {SmartadminWidgetsModule} from "./widgets/smartadmin-widgets.module";
+
+import {UtilsModule} from "./utils/utils.module";
+import {SmartProgressbarModule} from "./ui/smart-progressbar/smart-progressbar.module";
+
+
+@NgModule({
+  imports: [
+    CommonModule, FormsModule, HttpModule, RouterModule,
+
+
+
+  ],
+  declarations: [
+
+  ],
+  exports: [
+    CommonModule, FormsModule, HttpModule, RouterModule,
+
+    ModalModule,
+    ButtonsModule,
+
+    AlertModule,
+    TabsModule,
+    TooltipModule,
+    DropdownModule,
+    ProgressbarModule,
+
+
+    PopoverModule,
+
+    SmartadminLayoutModule,
+
+    I18nModule,
+
+    UtilsModule,
+
+    SmartProgressbarModule,
+
+    SmartadminWidgetsModule,
+
+  ]
+})
+export class SmartadminModule {}
