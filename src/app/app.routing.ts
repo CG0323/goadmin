@@ -12,14 +12,15 @@ export const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
-    data: {pageTitle: 'Home'},
+    data: {pageTitle: '证书管理'},
     children: [
       {
-        path: '', redirectTo: 'home', pathMatch: 'full',
+        path: '', redirectTo: 'certificates', pathMatch: 'full',
 
 
       },
-      {path: 'home', loadChildren: 'app/+home/home.module#HomeModule',data:{pageTitle: 'Home'}},
+      // {path: 'home', loadChildren: 'app/+home/home.module#HomeModule',data:{pageTitle: 'Home'}},
+      {path: 'certificates', loadChildren: 'app/+certificates/certificates.module#CertificatesModule',data:{pageTitle: '证书管理'}},
       // {path: 'dashboard', loadChildren: 'app/+dashboard/dashboard.module#DashboardModule',data:{pageTitle: 'Dashboard'}},
       // {path: 'smartadmin', loadChildren: 'app/+smartadmin-intel/smartadmin-intel.module#SmartadminIntelModule',data:{pageTitle: 'Smartadmin'}},
       // {path: 'app-views', loadChildren: 'app/+app-views/app-views.module#AppViewsModule',data:{pageTitle: 'App Views'}},
@@ -36,7 +37,7 @@ export const routes: Routes = [
     ]
   },
 
-  // { path: 'auth', component: AuthLayoutComponent, loadChildren: 'app/+auth/auth.module#AuthModule'},
+  { path: 'auth', component: AuthLayoutComponent, loadChildren: 'app/+auth/auth.module#AuthModule'},
 
   {path: '**', redirectTo: 'home'}
 //

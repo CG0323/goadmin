@@ -1,22 +1,26 @@
 <aside id="left-panel">
 
-  <!-- User info -->
-  <sa-login-info></sa-login-info>
-  <!-- end user info -->
+    <!-- User info -->
+    <sa-login-info></sa-login-info>
+    <!-- end user info -->
 
-  <nav>
-    <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+    <nav>
+        <!-- NOTE: Notice the gaps after each icon usage <i></i>..
     Please note that these links work a bit different than
     traditional href="" links. See documentation for details.
     -->
 
-    <ul saSmartMenu>
+        <ul saSmartMenu>
 
-        <li routerLinkActive="active">
-            <a routerLink="/home" title="Home">
-                <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">{{'Home' | i18n}}</span></a>
-        </li>
-      <!--<li>
+            <!--<li routerLinkActive="active">
+                <a routerLink="/home" title="Home">
+                    <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">{{'Home' | i18n}}</span></a>
+            </li>-->
+            <li routerLinkActive="active">
+                <a routerLink="/certificates" title="证书管理">
+                    <i class="fa fa-lg fa-fw fa-book"></i> <span class="menu-item-parent">证书管理</span></a>
+            </li>
+            <!--<li>
         <a title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span
           class="menu-item-parent">{{'Dashboard' | i18n}}</span></a>
         <ul>
@@ -355,9 +359,9 @@
         </ul>
       </li>-->
 
-    </ul>
-  </nav>
+        </ul>
+    </nav>
 
-  <sa-minify-menu></sa-minify-menu>
+    <sa-minify-menu></sa-minify-menu>
 
 </aside>

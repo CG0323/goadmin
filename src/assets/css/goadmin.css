@@ -10,6 +10,7 @@
  * unique to you with each update of SmartAdmin.
  */
 
+
 /*
  * INDEX
  * 
@@ -17,3 +18,18 @@
  * - BODY
  * - CUSTOM STYLES
  */
+
+body {
+    font-family: Microsoft YaHei, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.logo-text {
+    margin-left: 1em;
+}
+
+.ui-cell-data {
+    font-family: Microsoft YaHei, "Helvetica Neue", sans-serif;
+}

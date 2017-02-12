@@ -6,7 +6,6 @@ import { LayoutService } from '../shared/layout/layout.service'
 import { UserService } from '../shared/user/user.service'
 import {SoundService} from "../shared/sound/sound.service";
 
-
 import { throwIfAlreadyLoaded } from './guards/module-import-guard';
 
 import {TabsModule, ProgressbarModule, TooltipModule, DropdownModule, AlertModule} from "ng2-bootstrap";
