@@ -22,7 +22,7 @@
 
                 <input type="text" pInputText size="30" placeholder="搜索姓名或证书编号" (ngModelChange)="filterChange($event)" [(ngModel)]="globalFilter">
                 <button class="btn btn-primary" style="margin:4px 4px 4px 4px" (click)="lgModal.show()">批量导入</button>
-                <p-dataTable #dt [value]="certificates" [rows]="20" [paginator]="true" [lazy]="true" [totalRecords]="totalCount" (onLazyLoad)="loadCertificates($event)">
+                <p-dataTable #dt [value]="certificates" [rows]="20" [paginator]="true" [lazy]="true" [totalRecords]="totalCount" (onLazyLoad)="onLazyLoad($event)">
                     <p-column field="certificate_id" header="证书编号"></p-column>
                     <p-column field="name" header="姓名"></p-column>
                     <p-column field="date" header="颁发日期">
@@ -31,11 +31,11 @@
                         </template>
                     </p-column>
                     <p-column field="content" header="证书内容"></p-column>
-                    <!--<p-column styleClass="col-button" header="打谱" [style]="{'width':'60px'}">
-                        <template let-kifu="rowData" let-i="rowIndex" pTemplate="body">
-                            <a href="javascript:void(0)" (click)="onSelectKifu(kifu)">打谱</a>
+                    <p-column styleClass="col-button" header="操作">
+                        <template let-certificate="rowData" let-i="rowIndex" pTemplate="body">
+                            <a href="javascript:void(0)" (click)="onDeleteCertificate(certificate._id)">删除</a>
                         </template>
-                    </p-column>-->
+                    </p-column>
                 </p-dataTable>
             </sa-widget>
         </div>

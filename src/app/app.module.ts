@@ -13,6 +13,7 @@ import { routing } from './app.routing'
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
+import {NotificationService} from './shared/utils/notification.service';
 
 // Core providers
 import {CoreModule} from "./core/core.module";
@@ -21,7 +22,8 @@ import {SmartadminLayoutModule} from "./shared/layout/layout.module";
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
+  NotificationService
 ];
 
 type StoreType = {

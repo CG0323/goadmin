@@ -4,6 +4,8 @@ import {Certificate} from '../models/index';
 import {ModalDirective} from "ng2-bootstrap";
 import { LazyLoadEvent, DataTable} from 'primeng/primeng';
 import {NotificationService} from "../../shared/utils/notification.service";
+import { Subject } from 'rxjs/Subject';
+
 @Component({
   selector: 'app-cert-manager',
   templateUrl: './certificates-manager.component.html'
@@ -29,8 +31,34 @@ export class CertificatesManagerComponent implements OnInit {
         return matchDate.toLocaleDateString();
     }
 
-  loadCertificates(event: LazyLoadEvent) {
-    this.certificateService.searchCertificates(event.first, event.rows, this.globalFilter)
+  onLazyLoad(event: LazyLoadEvent) {
+    this.loadCertificates(event.first,event.rows,this.globalFilter);
+  }
+
+  onDeleteCertificate(id: string){
+    this.notificationService.smartMessageBox({
+      title: "删除确认",
+      content: "确认要删除此条证书?",
+      buttons: '[No][Yes]'
+    }, (ButtonPressed) => {
+      if (ButtonPressed === "Yes") {
+        this.certificateService.deleteCertificate(id)
+            .subscribe(res=>{
+              this.forceRefresh();
+              this.notificationService.smallBox({
+                title: "操作成功",
+                content: "证书已删除",
+                color: "#739E73",
+                timeout: 3000,
+                iconSmall: "fa fa-check",
+              });
+            })
+      }
+    });
+  }
+
+  loadCertificates(first:number, rows:number, search:string){
+    this.certificateService.searchCertificates(first, rows, search)
     .subscribe(data=>{
       this.certificates = data.certificates;
       this.totalCount = data.totalCount;
@@ -39,7 +67,11 @@ export class CertificatesManagerComponent implements OnInit {
 
   filterChange(newValue){
       this.globalFilter = newValue;
-      this.forceRefresh();
+      let paging = {
+            first: 0,
+            rows: 20
+      };
+      this.dataTable.paginate(paging);
   }
 
   forceRefresh(){
@@ -72,12 +104,12 @@ export class CertificatesManagerComponent implements OnInit {
       this.lgModal.hide();
       this.importText = "";
       this.forceRefresh();
-      this.notificationService.bigBox({
+      this.notificationService.smallBox({
         title: "批量导入完成",
         content: res.message,
         color: "#739E73",
         timeout: 3000,
-        icon: "fa fa-check",
+        iconSmall: "fa fa-check",
       });
     })
   }
