@@ -16,6 +16,7 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { NotificationService} from './shared/utils/notification.service';
 import { UserService } from './shared/user/user.service'
+import { AdminGuard} from './admin.guard.service';
 
 
 // Core providers
@@ -28,7 +29,8 @@ const APP_PROVIDERS = [
   AppState,
   NotificationService,
   UserService,
-  AUTH_PROVIDERS
+  AUTH_PROVIDERS,
+  AdminGuard
 ];
 
 type StoreType = {
