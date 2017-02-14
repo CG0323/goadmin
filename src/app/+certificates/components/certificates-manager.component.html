@@ -1,6 +1,6 @@
 <div id="content">
     <div class="row">
-        <sa-big-breadcrumbs [items]="['证书管理']" icon="home" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+        <sa-big-breadcrumbs [items]="['证书管理']" icon="book" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
     </div>
     <div class="row">
 
@@ -12,14 +12,6 @@
                 <header><span class="widget-icon"> <i class="fa fa-table"></i> </span>
                     <h2>证书列表</h2>
                 </header>
-                <!--<p-dataTable [value]="certificates">
-                    <p-column field="id" header="证书编号"></p-column>
-                    <p-column field="name" header="姓名"></p-column>
-                    <p-column field="date" header="日期"></p-column>
-                    <p-column field="content" header="证书内容"></p-column>
-                </p-dataTable>-->
-                <!--<i class="fa fa-search" style="margin:4px 4px 5px 5px"></i>-->
-
                 <input type="text" pInputText size="30" placeholder="搜索姓名或证书编号" (ngModelChange)="filterChange($event)" [(ngModel)]="globalFilter">
                 <button class="btn btn-primary" style="margin:4px 4px 4px 4px" (click)="lgModal.show()">批量导入</button>
                 <p-dataTable #dt [value]="certificates" [rows]="20" [paginator]="true" [lazy]="true" [totalRecords]="totalCount" (onLazyLoad)="onLazyLoad($event)">

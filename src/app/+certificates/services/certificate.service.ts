@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { CERTIFICATE } from '../common/category.common';
 
 import {Certificate} from '../models/index';
-import {AppConfig} from './app-config';
+import {AppConfig} from '../../app-config';
 import {NotificationService} from "../../shared/utils/notification.service";
 @Injectable()
 export class CertificateService {
@@ -39,6 +39,14 @@ export class CertificateService {
     let options = new RequestOptions({ headers: headers });
     return this.http.post(AppConfig.API_BASE + 'certificates/bulk', certificates, options)
       .map(res=>res.json())
+      .catch(this.handleError);
+  }
+
+  clientSearchCertificates(search:string):Observable<any>{
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(AppConfig.API_BASE + 'certificates/client-search/'+search,  options)
+      .map(res => res.json())
       .catch(this.handleError);
   }
 

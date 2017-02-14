@@ -1,26 +1,32 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy, Input,NgZone} from '@angular/core';
 import {UserService} from "../user.service";
 import {LayoutService} from "../../layout/layout.service";
 
 @Component({
-
   selector: 'sa-login-info',
-  templateUrl: './login-info.component.html',
+  templateUrl: './login-info.component.html'
 })
 export class LoginInfoComponent implements OnInit {
 
-  user:any;
+  private user:any;
+  private subscription;
 
   constructor(
     private userService: UserService,
-              private layoutService: LayoutService) {
+    private layoutService: LayoutService) {
+      
   }
 
   ngOnInit() {
-    this.userService.getLoginInfo().subscribe(user => {
-      this.user = user
+    this.user = this.userService.userInfo;
+    this.subscription = this.userService.getLoginInfo()
+    .subscribe(user=>{
+      this.user = user;
     })
+  }
 
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
   toggleShortcut() {

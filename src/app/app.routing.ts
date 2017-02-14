@@ -12,10 +12,10 @@ export const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
-    data: {pageTitle: '证书管理'},
+    data: {pageTitle: 'GoAdmin'},
     children: [
       {
-        path: '', redirectTo: 'certificates', pathMatch: 'full',
+        path: '', redirectTo: 'certificates/search', pathMatch: 'full',
 
 
       },

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+import { CoolStorageModule } from 'angular2-cool-storage';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -13,7 +14,9 @@ import { routing } from './app.routing'
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
-import {NotificationService} from './shared/utils/notification.service';
+import { NotificationService} from './shared/utils/notification.service';
+import { UserService } from './shared/user/user.service'
+
 
 // Core providers
 import {CoreModule} from "./core/core.module";
@@ -23,7 +26,8 @@ import {SmartadminLayoutModule} from "./shared/layout/layout.module";
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
-  NotificationService
+  NotificationService,
+  UserService
 ];
 
 type StoreType = {
@@ -47,6 +51,7 @@ type StoreType = {
     CoreModule,
     SmartadminLayoutModule,
     routing,
+    CoolStorageModule
   ],
   exports: [
   ],

@@ -1,0 +1,31 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs [items]="['证书查询']" icon="search" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <section>
+                <label class="input" style="margin:auto">
+                        <input type="text" class="input-lg" placeholder="输入姓名或证书编号" [(ngModel)] = "searchText">
+                        <button class="btn btn-primary btn-lg" (click)="search()" style="vertical-align: unset"><i class="fa fa-search"></i></button>
+                    </label>
+            </section>
+            <sa-widget *ngIf="certificates" [editbutton]="false" color="darken">
+                <header><span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>查询结果</h2>
+                </header>
+                <p-dataTable [value]="certificates">
+                    <p-column field="certificate_id" header="证书编号"></p-column>
+                    <p-column field="name" header="姓名"></p-column>
+                    <p-column field="date" header="颁发日期">
+                        <template let-certificate="rowData" let-i="rowIndex" pTemplate="body">
+                                <span>{{getDate(certificate.date)}}</span>
+                            </template>
+                    </p-column>
+                    <p-column field="content" header="证书内容"></p-column>
+                </p-dataTable>
+            </sa-widget>
+        </div>
+    </div>
+
+</div>

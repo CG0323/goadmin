@@ -32,7 +32,7 @@ import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/observable/of';
 
 import 'primeng/primeng';
-
+import 'angular2-cool-storage';
 
 // Smartadmin Dependencies
 window['jQuery'] = require('jquery');

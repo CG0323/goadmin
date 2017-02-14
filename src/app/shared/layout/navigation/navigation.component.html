@@ -17,11 +17,15 @@
                     <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">{{'Home' | i18n}}</span></a>
             </li>-->
             <li routerLinkActive="active">
-                <a routerLink="/certificates" title="证书管理">
+                <a routerLink="/certificates/search" title="证书查询">
+                    <i class="fa fa-lg fa-fw fa-search"></i> <span class="menu-item-parent">证书查询</span></a>
+            </li>
+            <li *ngIf="isAdmin" routerLinkActive="active">
+                <a routerLink="/certificates/manage" title="证书管理">
                     <i class="fa fa-lg fa-fw fa-book"></i> <span class="menu-item-parent">证书管理</span></a>
             </li>
 
-            <li>
+            <li *ngIf="isAdmin">
                 <a title="赛事管理"><i class="fa fa-lg fa-fw fa-calendar"></i> <span
                 class="menu-item-parent">赛事管理(建设中)</span></a>
                 <ul>
@@ -36,7 +40,7 @@
                 </ul>
             </li>
 
-            <li>
+            <li *ngIf="isAdmin">
                 <a title="做题软件管理"><i class="fa fa-lg fa-fw fa-gamepad"></i> <span
                 class="menu-item-parent">做题软件管理(建设中)</span></a>
                 <ul>
