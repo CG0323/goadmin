@@ -16,12 +16,13 @@ export class UserService {
     private localStorage: CoolLocalStorage
     ) {
       this.userInfo = this.localStorage.getObject('user');
-      
+      this.user = new Subject();
+
       if(!this.userInfo){
         this.resetUserInfo();
+      }else{
+        this.user.next(this.userInfo);
       }
-      this.user = new Subject();
-      this.user.next(this.userInfo);
   }
 
   resetUserInfo(){
