@@ -33,6 +33,7 @@ export class UserService {
           token: null
         };
     this.localStorage.setObject('user',this.userInfo);
+    this.localStorage.removeItem('token');
     this.user.next(this.userInfo);
   }
 
@@ -40,6 +41,7 @@ export class UserService {
     if(userInfo){
       this.userInfo = userInfo;
       this.localStorage.setObject('user',this.userInfo);
+      this.localStorage.setItem('token',this.userInfo.token);
       this.user.next(userInfo);
     }
   }

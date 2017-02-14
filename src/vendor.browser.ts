@@ -33,6 +33,7 @@ import 'rxjs/add/observable/of';
 
 import 'primeng/primeng';
 import 'angular2-cool-storage';
+import 'angular2-jwt';
 
 // Smartadmin Dependencies
 window['jQuery'] = require('jquery');

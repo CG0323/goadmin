@@ -1,10 +1,10 @@
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http, RequestOptions } from '@angular/http';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { CoolStorageModule } from 'angular2-cool-storage';
-
+import { AUTH_PROVIDERS, provideAuth, AuthConfig, AuthHttp} from 'angular2-jwt';
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -27,7 +27,8 @@ const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
   NotificationService,
-  UserService
+  UserService,
+  AUTH_PROVIDERS
 ];
 
 type StoreType = {
@@ -35,6 +36,14 @@ type StoreType = {
   restoreInputValues: () => void,
   disposeOldHosts: () => void
 };
+
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig({
+    tokenName: 'token',
+          tokenGetter: (() => localStorage.getItem('token')),
+          globalHeaders: [{'Content-Type':'application/json'}],
+     }), http, options);
+}
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -57,7 +66,12 @@ type StoreType = {
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    }
   ]
 })
 export class AppModule {

@@ -9,7 +9,7 @@ import 'rxjs/add/operator/delay';
 
 @Injectable()
 export class AuthService {
-  isLoggedIn: boolean = false;
+  // isLoggedIn: boolean = false;
 
   // store the URL so we can redirect after logging in
   redirectUrl: string;
@@ -20,26 +20,23 @@ export class AuthService {
   ) {
   }
 
-  login(): Observable<boolean> {
-    return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
-  }
 
   authenticate(username:string, password:string):Observable<any> {
     return this.http.post(AppConfig.LOGIN_BASE + 'login', {username:username, password:password})
     .map(res=>res.json())
     .map(user=> {
-      this.isLoggedIn = true;
+      // this.isLoggedIn = true;
       return user;
     })
     .catch(()=> Observable.of(null));
   }
 
-  logout(): void {
-    this.http.post(AppConfig.LOGIN_BASE + 'logtout',{})
-    .subscribe(res=> {
-      this.isLoggedIn = false;
-    }, error=> {
-      console.log(error);
-    })
-  }
+  // logout(): void {
+  //   this.http.post(AppConfig.LOGIN_BASE + 'logtout',{})
+  //   .subscribe(res=> {
+  //     this.isLoggedIn = false;
+  //   }, error=> {
+  //     console.log(error);
+  //   })
+  // }
 }
