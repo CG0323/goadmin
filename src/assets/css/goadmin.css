@@ -33,3 +33,7 @@ body {
 .ui-cell-data {
     font-family: Microsoft YaHei, "Helvetica Neue", sans-serif;
 }
+
+.date-control {
+    display: block;
+}

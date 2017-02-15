@@ -10,10 +10,10 @@ import { throwIfAlreadyLoaded } from './guards/module-import-guard';
 
 import {TabsModule, ProgressbarModule, TooltipModule, DropdownModule, AlertModule} from "ng2-bootstrap";
 
+
 @NgModule({
   imports: [
     CommonModule,
-
 
     TooltipModule.forRoot(),
     DropdownModule.forRoot(),

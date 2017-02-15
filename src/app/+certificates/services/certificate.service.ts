@@ -40,6 +40,12 @@ export class CertificateService {
       .catch(this.handleError);
   }
 
+  saveCertificate(certificate:Certificate):Observable<any>{
+    return this.authHttp.post(AppConfig.API_BASE + 'certificates/', certificate)
+      .map(res=>res.json())
+      .catch(this.handleError);
+  }
+
   clientSearchCertificates(search:string):Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -49,17 +55,17 @@ export class CertificateService {
   }
 
   handleError(error: any) {
-    let errMsg = error.json().error || 'Server error';
-    console.log(errMsg);
-    this.notificationService.bigBox({
-      title: "操作失败",
-      content: errMsg,
-      color: "#C46A69",
-      icon: "fa fa-warning shake animated",
-      number: "1",
-      timeout: 4000
-    });
-    return Observable.throw(errMsg);
+    // let errMsg = error.json().error || 'Server error';
+    // console.log(errMsg);
+    // this.notificationService.bigBox({
+    //   title: "操作失败",
+    //   content: errMsg,
+    //   color: "#C46A69",
+    //   icon: "fa fa-warning shake animated",
+    //   number: "1",
+    //   timeout: 4000
+    // });
+    return Observable.throw(error);
 }
 
 }

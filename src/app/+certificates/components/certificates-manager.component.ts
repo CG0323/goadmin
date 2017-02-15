@@ -13,13 +13,26 @@ import { Subject } from 'rxjs/Subject';
 export class CertificatesManagerComponent implements OnInit {
   @ViewChild('dt') dataTable: DataTable;
   @ViewChild('lgModal') public lgModal:ModalDirective;
+  @ViewChild('editModal') public editModal:ModalDirective;
   private certificates:Certificate[] = [];
+  private selectedCert:Certificate = <Certificate>{};
   private totalCount : number = 0;
   private globalFilter: string;
   private importText:string;
   private formatError:boolean;
+  private cn:any;
+  private dateValue:Date;
 
   constructor(private certificateService: CertificateService, private notificationService: NotificationService) { 
+      //localization for date picker
+        this.cn = {
+            firstDayOfWeek: 0,
+            dayNames: ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+            dayNamesShort: ["日", "一", "二", "三", "四", "五", "六"],
+            dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
+            monthNames: [ "一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月" ],
+            monthNamesShort: [ "一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月" ]
+        };
   }
 
   ngOnInit() {
@@ -39,7 +52,7 @@ export class CertificatesManagerComponent implements OnInit {
     this.notificationService.smartMessageBox({
       title: "删除确认",
       content: "确认要删除此条证书?",
-      buttons: '[No][Yes]'
+      buttons: '[否][是]'
     }, (ButtonPressed) => {
       if (ButtonPressed === "Yes") {
         this.certificateService.deleteCertificate(id)
@@ -52,9 +65,15 @@ export class CertificatesManagerComponent implements OnInit {
                 timeout: 3000,
                 iconSmall: "fa fa-check",
               });
-            })
+            }, error => this.handleError)
       }
     });
+  }
+
+  onEditCertificate(certificate:Certificate){
+    this.selectedCert = certificate;
+    this.dateValue = new Date(certificate.date);
+    this.editModal.show();
   }
 
   loadCertificates(first:number, rows:number, search:string){
@@ -62,7 +81,7 @@ export class CertificatesManagerComponent implements OnInit {
     .subscribe(data=>{
       this.certificates = data.certificates;
       this.totalCount = data.totalCount;
-    })
+    }, error => this.handleError);
   }
 
   filterChange(newValue){
@@ -110,7 +129,7 @@ export class CertificatesManagerComponent implements OnInit {
         color: "#739E73",
         timeout: 3000,
         iconSmall: "fa fa-check",
-      });
+      }, error => this.handleError);
     })
   }
 
@@ -132,7 +151,40 @@ export class CertificatesManagerComponent implements OnInit {
     this.formatError = false;
   }
 
+
+
+  saveCert(){
+    this.selectedCert.date = this.dateValue;
+    this.certificateService.saveCertificate(this.selectedCert)
+    .subscribe(res => {
+      this.editModal.hide();
+      this.importText = "";
+      // this.forceRefresh();
+      this.notificationService.smallBox({
+        title: "证书修改完成",
+        content: "证书已成功修改",
+        color: "#739E73",
+        timeout: 3000,
+        iconSmall: "fa fa-check",
+      }, error => this.handleError);
+    })
+  }
+
   trim(s){
     return s.replace(/(^\s*)|(\s*$)/g, "");
   }
+
+  handleError(error: any) {
+    let errMsg = error.json().error || 'Server error';
+    console.log(errMsg);
+    this.notificationService.bigBox({
+      title: "操作失败",
+      content: errMsg,
+      color: "#C46A69",
+      icon: "fa fa-warning shake animated",
+      number: "1",
+      timeout: 4000
+    });
+  }
+
 }

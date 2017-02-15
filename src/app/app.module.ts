@@ -18,7 +18,6 @@ import { NotificationService} from './shared/utils/notification.service';
 import { UserService } from './shared/user/user.service'
 import { AdminGuard} from './admin.guard.service';
 
-
 // Core providers
 import {CoreModule} from "./core/core.module";
 import {SmartadminLayoutModule} from "./shared/layout/layout.module";
@@ -51,7 +50,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
 @NgModule({
-  bootstrap: [ AppComponent ],
+  bootstrap: [ AppComponent],
   declarations: [
     AppComponent,
   ],
@@ -62,7 +61,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     CoreModule,
     SmartadminLayoutModule,
     routing,
-    CoolStorageModule
+    CoolStorageModule,
   ],
   exports: [
   ],
