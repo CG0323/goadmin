@@ -23,9 +23,8 @@ export class AdminGuard implements CanActivate, OnInit, OnDestroy{
   canActivate(){
       var token = this.localStorage.getItem('token');
       if(token){
-        let user = this.jwtHelper.decodeToken(token).iss;
+        let user = this.jwtHelper.decodeToken(token);
         let expired = this.jwtHelper.isTokenExpired(token)
-        console.log(user);
         if(!expired && user.role === "管理员"){
           return true;
         }
