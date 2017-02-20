@@ -21,6 +21,8 @@ export const routes: Routes = [
       },
       // {path: 'home', loadChildren: 'app/+home/home.module#HomeModule',data:{pageTitle: 'Home'}},
       {path: 'certificates', loadChildren: 'app/+certificates/certificates.module#CertificatesModule',data:{pageTitle: '证书管理'}},
+      {path: 'teachers', loadChildren: 'app/+teachers/teachers.module#TeachersModule',data:{pageTitle: '教师账号管理'}},
+      {path: 'students', loadChildren: 'app/+students/students.module#StudentsModule',data:{pageTitle: '学员账号管理'}},
       // {path: 'dashboard', loadChildren: 'app/+dashboard/dashboard.module#DashboardModule',data:{pageTitle: 'Dashboard'}},
       // {path: 'smartadmin', loadChildren: 'app/+smartadmin-intel/smartadmin-intel.module#SmartadminIntelModule',data:{pageTitle: 'Smartadmin'}},
       // {path: 'app-views', loadChildren: 'app/+app-views/app-views.module#AppViewsModule',data:{pageTitle: 'App Views'}},

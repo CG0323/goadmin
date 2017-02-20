@@ -17,7 +17,7 @@ import { AppState, InternalStateType } from './app.service';
 import { NotificationService} from './shared/utils/notification.service';
 import { UserService } from './shared/user/user.service'
 import { AdminGuard} from './admin.guard.service';
-
+import { TeacherGuard} from './teacher.guard.service';
 // Core providers
 import {CoreModule} from "./core/core.module";
 import {SmartadminLayoutModule} from "./shared/layout/layout.module";
@@ -29,7 +29,8 @@ const APP_PROVIDERS = [
   NotificationService,
   UserService,
   AUTH_PROVIDERS,
-  AdminGuard
+  AdminGuard,
+  TeacherGuard
 ];
 
 type StoreType = {

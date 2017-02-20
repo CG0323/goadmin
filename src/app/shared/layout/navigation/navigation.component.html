@@ -25,37 +25,43 @@
                     <i class="fa fa-lg fa-fw fa-book"></i> <span class="menu-item-parent">证书管理</span></a>
             </li>
 
-            <li *ngIf="isAdmin">
+            <!--<li *ngIf="isAdmin">
                 <a title="赛事管理"><i class="fa fa-lg fa-fw fa-calendar"></i> <span
                 class="menu-item-parent">赛事管理(建设中)</span></a>
                 <ul>
-                    <!--<li routerLinkActive="active">-->
-                    <li>
+                    <li routerLinkActive="active">
                         <a routerLink="/certificates">比赛信息管理(建设中)</a>
                     </li>
-                    <!--<li routerLinkActive="active">-->
-                    <li>
+                    <li routerLinkActive="active">
                         <a routerLink="/dcertificates">报名信息管理(建设中)</a>
                     </li>
                 </ul>
-            </li>
+            </li>-->
 
-            <li *ngIf="isAdmin">
+            <li *ngIf="isAdmin||isTeacher">
                 <a title="做题软件管理"><i class="fa fa-lg fa-fw fa-gamepad"></i> <span
-                class="menu-item-parent">做题软件管理(建设中)</span></a>
+                class="menu-item-parent">做题软件管理</span></a>
                 <ul>
-                    <!--<li routerLinkActive="active">-->
-                    <li>
-                        <a routerLink="/certificates">教师账号管理(建设中)</a>
+                    <li *ngIf="isAdmin" routerLinkActive="active">
+                        <a routerLink="/teachers">教师账号管理</a>
                     </li>
-                    <!--<li routerLinkActive="active">-->
-                    <li>
-                        <a routerLink="/dcertificates">学员账号管理(建设中)</a>
+                    <li routerLinkActive="active">
+                        <a routerLink="/students">学员账号管理</a>
                     </li>
-                    <!--<li routerLinkActive="active">-->
-                    <li>
+                    <!--<li>
+                        <a href="#">教师账号管理</a>
+                        <ul>
+                            <li routerLinkActive="active">
+                                <a routerLink="/teachers"><i class="fa fa-fw fa-search"></i>查看账号</a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a routerLink="/teachers/"><i class="fa fa-fw fa-plus"></i>添加账号</a>
+                            </li>
+                        </ul>
+                    </li>-->
+                    <!--<li routerLinkActive="active">
                         <a routerLink="/dcertificates">棋谱管理(建设中)</a>
-                    </li>
+                    </li>-->
                 </ul>
             </li>
 

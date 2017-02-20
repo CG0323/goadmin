@@ -11,6 +11,7 @@ import {Observable} from "rxjs/Rx";
 })
 export class NavigationComponent implements OnInit {
   private isAdmin:boolean;
+  private isTeacher:boolean;
   private subscription;
   constructor(
     private userService: UserService
@@ -20,6 +21,11 @@ export class NavigationComponent implements OnInit {
         this.isAdmin = true;
       }else{
         this.isAdmin = false;
+      }
+      if(user.role === "老师"){
+        this.isTeacher = true;
+      }else{
+        this.isTeacher = false;
       }
     })
   }
