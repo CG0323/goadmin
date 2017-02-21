@@ -17,4 +17,18 @@ export class StudentService {
     private http: Http
   ) {}
 
+  getStudents():Observable<any>{
+    return this.authHttp.get(AppConfig.LOGIN_BASE + 'students')
+      .map(res=>res.json())
+  }
+
+  addStudent(student:Student):Observable<any>{
+    return this.authHttp.post(AppConfig.LOGIN_BASE + 'student', student)
+      .map(res=>res.json())
+  }
+
+  deleteStudent(id:string):Observable<any>{
+    return this.authHttp.delete(AppConfig.LOGIN_BASE  + id)
+      .map(res => res.json())
+  }
 }

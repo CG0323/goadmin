@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { studentsRouting } from './students.routing';
 import {SmartadminModule} from "../shared/smartadmin.module";
 import {STUDENTS_COMPONENTS} from "./components/index";
-import {DataTableModule,SharedModule,CalendarModule} from 'primeng/primeng';
+import {DataTableModule,SharedModule,CalendarModule,DropdownModule} from 'primeng/primeng';
 import {StudentService} from './services/student.service';
 @NgModule({
   imports: [
@@ -12,7 +12,8 @@ import {StudentService} from './services/student.service';
     SmartadminModule,
     DataTableModule,
     SharedModule,
-    CalendarModule
+    CalendarModule,
+    DropdownModule
   ],
   declarations: [STUDENTS_COMPONENTS],
   providers: [StudentService]

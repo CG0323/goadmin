@@ -1,1 +1,90 @@
-<H1>正在建设中...</H1>
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs [items]="['做题软件管理','学员账号管理']" icon="gamepad" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+    </div>
+    <div class="row">
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <sa-widget [editbutton]="false" color="darken">
+                <header><span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>学员列表</h2>
+                </header>
+                <button class="btn btn-primary" style="margin:4px 4px 4px 4px" (click)="addModal.show()"><i class="fa fa-plus"></i> 添加学员</button>
+                <p-dataTable #dt [value]="students" [rows]="20" [paginator]="true" [pageLinks]="3">
+                    <p-column field="username" header="用户名" [filter]="true" filterPlaceholder="搜索"></p-column>
+                    <p-column field="password" header="密码"></p-column>
+                    <p-column field="name" header="学员姓名" [filter]="true" filterPlaceholder="搜索"></p-column>
+                    <p-column field="teacher" header="教师" [filter]="true" filterPlaceholder="搜索"></p-column>
+                    <p-column field="status" header="账户状态" [filter]="true" [style]="{'overflow':'visible'}" filterMatchMode="equals">
+                        <template pTemplate="filter" let-col>
+                            <p-dropdown [options]="statusList" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+                        </template>
+                    </p-column>
+                    <p-column field="expired_at" header="有效期至">
+                        <template let-student="rowData" let-i="rowIndex" pTemplate="body">
+                            <span>{{getDate(student.expired_at)}}</span>
+                        </template>
+                    </p-column>
+                    <p-column styleClass="col-button" header="操作">
+                        <template let-student="rowData" let-i="rowIndex" pTemplate="body">
+                            <a style="color:darkblue" href="javascript:void(0)" (click)="deleteStudent(student._id)">删除</a>
+                        </template>
+                    </p-column>
+                </p-dataTable>
+            </sa-widget>
+        </div>
+    </div>
+
+</div>
+
+<div bsModal #addModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="addModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+                <h4 class="modal-title">添加学员账号</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="username">用户名</label>
+                            <input type="text" class="form-control" name="username" (ngModelChange)="usernameChanged($event)" id="username" placeholder="用户名" [(ngModel)]="newStudent.username">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="password">初始密码</label>
+                            <input type="text" class="form-control" id="password" name="password" placeholder="初始密码" [(ngModel)]="newStudent.password">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="name">学员姓名</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="学员姓名" [(ngModel)]="newStudent.name">
+                        </div>
+                    </div>
+                </div>
+                <label class="txt-color-red" *ngIf="addError">{{addError}}</label>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="addModal.hide()">
+            取消
+          </button>
+                <button [disabled]="!newStudent.name||!newStudent.username || !newStudent.password" type="button" class="btn btn-primary" (click)="addStudent()">
+            保存
+          </button>
+            </div>
+        </div>
+    </div>
+</div>

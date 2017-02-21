@@ -1,5 +1,6 @@
 
 export interface Student {
+    _id: string;
     teacher: string;
     name: string;
     username: string;

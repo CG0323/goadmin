@@ -4,7 +4,7 @@ import {Certificate} from '../models/index';
 import {ModalDirective} from "ng2-bootstrap";
 import { LazyLoadEvent, DataTable} from 'primeng/primeng';
 import {NotificationService} from "../../shared/utils/notification.service";
-import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-cert-manager',
@@ -54,8 +54,9 @@ export class CertificatesManagerComponent implements OnInit {
       content: "确认要删除此条证书?",
       buttons: '[否][是]'
     }, (ButtonPressed) => {
-      if (ButtonPressed === "Yes") {
+      if (ButtonPressed === "是") {
         this.certificateService.deleteCertificate(id)
+            .catch(err=> this.handleError(err))
             .subscribe(res=>{
               this.forceRefresh();
               this.notificationService.smallBox({
@@ -78,6 +79,7 @@ export class CertificatesManagerComponent implements OnInit {
 
   loadCertificates(first:number, rows:number, search:string){
     this.certificateService.searchCertificates(first, rows, search)
+    .catch(err=> this.handleError(err))
     .subscribe(data=>{
       this.certificates = data.certificates;
       this.totalCount = data.totalCount;
@@ -119,7 +121,9 @@ export class CertificatesManagerComponent implements OnInit {
       }
       
     }
-    this.certificateService.saveCertificates(certs).subscribe(res => {
+    this.certificateService.saveCertificates(certs)
+    .catch(err=> this.handleError(err))
+    .subscribe(res => {
       this.lgModal.hide();
       this.importText = "";
       this.forceRefresh();
@@ -156,6 +160,7 @@ export class CertificatesManagerComponent implements OnInit {
   saveCert(){
     this.selectedCert.date = this.dateValue;
     this.certificateService.saveCertificate(this.selectedCert)
+    .catch(err=> this.handleError(err))
     .subscribe(res => {
       this.editModal.hide();
       this.importText = "";
@@ -175,8 +180,7 @@ export class CertificatesManagerComponent implements OnInit {
   }
 
   handleError(error: any) {
-    let errMsg = error.json().error || 'Server error';
-    console.log(errMsg);
+    let errMsg = error.json().message || 'Server error';
     this.notificationService.bigBox({
       title: "操作失败",
       content: errMsg,
@@ -185,6 +189,7 @@ export class CertificatesManagerComponent implements OnInit {
       number: "1",
       timeout: 4000
     });
+    return Observable.throw(error);
   }
 
 }
