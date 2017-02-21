@@ -13,7 +13,9 @@
                     <h2>学员列表</h2>
                 </header>
                 <button class="btn btn-primary" style="margin:4px 4px 4px 4px" (click)="addModal.show()"><i class="fa fa-plus"></i> 添加学员</button>
-                <p-dataTable #dt [value]="students" [rows]="20" [paginator]="true" [pageLinks]="3">
+                <button *ngIf="selectedStudents.length > 0" class="btn btn-primary" style="margin:4px 4px 4px 4px" (click)="activate()"><i class="fa fa-dollar"></i> 批量激活</button>
+                <p-dataTable #dt [value]="students" [rows]="20" [paginator]="true" [pageLinks]="3" [(selection)]="selectedStudents">
+                    <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
                     <p-column field="username" header="用户名" [filter]="true" filterPlaceholder="搜索"></p-column>
                     <p-column field="password" header="密码"></p-column>
                     <p-column field="name" header="学员姓名" [filter]="true" filterPlaceholder="搜索"></p-column>

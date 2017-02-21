@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {StudentService} from '../services/student.service';
+import {DataExchangeService} from '../services/data-exchange.service';
 import {Student} from '../models/index';
 import {ModalDirective} from "ng2-bootstrap";
 import { LazyLoadEvent, DataTable} from 'primeng/primeng';
 import {NotificationService} from "../../shared/utils/notification.service";
 import { Observable } from 'rxjs/Observable';
+import {Router, ActivatedRoute} from '@angular/router';
+import { CoolLocalStorage } from 'angular2-cool-storage';
 
 @Component({
   selector: 'app-students',
@@ -17,7 +20,13 @@ export class StudentsComponent implements OnInit {
   private students:Student[] = [];
   private addError = null;
   private statusList = [];
-  constructor(private studentService: StudentService, private notificationService: NotificationService) { 
+  private selectedStudents = [];
+  constructor(
+      private studentService: StudentService,
+      private localStorage: CoolLocalStorage,
+      private notificationService: NotificationService,
+      private router: Router
+  ) { 
     this.loadStudents();
     this.statusList = [];
     this.statusList.push({label: '所有状态', value: null});
@@ -80,6 +89,11 @@ export class StudentsComponent implements OnInit {
             }, error => this.handleError)
       }
     });
+  }
+
+  activate(){
+    this.localStorage.setObject("students_to_activate",this.selectedStudents);
+    this.router.navigate(['./students/activation']);
   }
 
   handleError(error: any) {

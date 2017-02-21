@@ -1,0 +1,86 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs [items]="['做题软件管理','学员账号激活']" icon="dollar" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+    </div>
+
+    <sa-widget [editbutton]="false" [deletebutton]="false" color="darken">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-dollar"></i> </span>
+
+            <h2>账号激活</h2>
+
+        </header>
+
+        <!-- widget div-->
+        <div>
+
+            <!-- widget content -->
+            <div class="widget-body">
+
+                <div class="row">
+                    <form novalidate="novalidate">
+                        <div class="col-sm-12">
+                            <div class="form-bootstrapWizard clearfix">
+                                <ul class="bootstrapWizard">
+                                    <li *ngFor="let pane of steps; let i = index" [class.active]="activeStep == pane">
+                                        <a (click)="setActiveStep(pane)"> <span class="step">
+                    <span *ngIf="!pane.checked">{{i + 1}}</span>
+                                            <i class="fa fa-check" *ngIf="pane.checked"></i>
+                                            </span> <span class="title">{{pane.title}}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-content">
+                                <div class="tab-pane" [class.active]="activeStep.key == 'step1'">
+                                    <br>
+
+                                    <h3><strong>第一步 </strong> - 选择套餐</h3>
+
+                                </div>
+                                <div class="tab-pane" [class.active]="activeStep.key == 'step2'">
+                                    <br>
+
+                                    <h3><strong>第二步 </strong> - 支付</h3>
+
+                                </div>
+                                <div class="tab-pane" [class.active]="activeStep.key == 'step3'">
+                                    <br>
+
+                                    <h3><strong>第三步</strong> - 完成</h3>
+
+                                </div>
+
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <ul class="pager wizard no-margin">
+                                                <li class="previous">
+                                                    <a (click)="prevStep()" [class.disabled]="steps.indexOf(activeStep) == 0" class="btn btn-lg btn-default"> 上一步
+                        </a>
+                                                </li>
+                                                <li class="next">
+                                                    <a (click)="nextStep()" [class.disabled]="activeStep.submitted && !activeStep.valid" class="btn btn-lg txt-color-darken"> 下一步
+                        </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </sa-widget>
+
+
+
+</div>
