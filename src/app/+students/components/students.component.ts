@@ -121,4 +121,14 @@ export class StudentsComponent implements OnInit {
     this.addError = null;
   }
 
+  getStatusClass(status:string){
+    if(status === "已激活"){
+      return "label label-success txt-color-white";
+    }else if (status === "未激活"){
+      return "label label-warning txt-color-white";
+    }else{
+      return "label label-default txt-color-white";
+    }
+  }
+
 }

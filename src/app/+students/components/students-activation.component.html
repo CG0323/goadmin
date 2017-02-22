@@ -5,7 +5,7 @@
 
     <sa-widget [editbutton]="false" [deletebutton]="false" color="darken">
         <header>
-            <span class="widget-icon"> <i class="fa fa-dollar"></i> </span>
+            <span class="widget-icon"> <i class="fa fa-cny"></i> </span>
 
             <h2>账号激活</h2>
 
@@ -15,7 +15,7 @@
         <div>
 
             <!-- widget content -->
-            <div class="widget-body">
+            <div id="acitvation-panel" class="widget-body acitvation-panel">
 
                 <div class="row">
                     <form novalidate="novalidate">
@@ -36,19 +36,53 @@
                                     <br>
 
                                     <h3><strong>第一步 </strong> - 选择套餐</h3>
+                                    <p-radioButton name="package" value="type1" label="12个月" [(ngModel)]="selectedPackage" (ngModelChange)="computeExpirationAndCharge($event)"></p-radioButton>
+                                    <p-radioButton name="package" value="type2" label="3个月" [(ngModel)]="selectedPackage" (ngModelChange)="computeExpirationAndCharge($event)"></p-radioButton>
+                                    <h3><strong>预览 </strong> - 即将激活以下账号, 共需支付 <strong style="color: red">{{charge | currency:'RMB':true}}</strong></h3>
+                                    <p-dataTable #dt [value]="students" [rows]="10" [paginator]="true" [pageLinks]="3">
+                                        <p-column field="username" header="用户名"></p-column>
+                                        <p-column field="name" header="学员姓名"></p-column>
+                                        <p-column field="expired_at" header="激活后有效期至">
+                                            <template let-student="rowData" let-i="rowIndex" pTemplate="body">
+                                                 <span>{{getDate(expirations[i])}}</span>
+                                            </template>
+                                        </p-column>
+
+                                    </p-dataTable>
 
                                 </div>
                                 <div class="tab-pane" [class.active]="activeStep.key == 'step2'">
                                     <br>
 
-                                    <h3><strong>第二步 </strong> - 支付</h3>
+                                    <h3><strong>第二步 </strong> - 微信支付(此处功能尚未实现，仅为演示)</h3>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                        </div>
+                                        <div class="col-md-3" style="margin-top:100px">
+                                            <h3 style="color: red; margin-left:1.8em">总额:{{charge | currency:'RMB':true}}</h3>
+                                            <img src="assets/img/qcode.jpg" alt="">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <img src="assets/img/wechat.png" alt="">
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div class="tab-pane" [class.active]="activeStep.key == 'step3'">
                                     <br>
 
-                                    <h3><strong>第三步</strong> - 完成</h3>
+                                    <h3><strong>第三步</strong> - 激活完成</h3>
+                                    <h3>以下账号已成功激活</h3>
+                                    <p-dataTable #dt [value]="students" [rows]="10" [paginator]="true" [pageLinks]="3">
+                                        <p-column field="username" header="用户名"></p-column>
+                                        <p-column field="name" header="学员姓名"></p-column>
+                                        <p-column field="expired_at" header="新有效期">
+                                            <template let-student="rowData" let-i="rowIndex" pTemplate="body">
+                                                 <span>{{getDate(expirations[i])}}</span>
+                                            </template>
+                                        </p-column>
 
+                                    </p-dataTable>
                                 </div>
 
                                 <div class="form-actions">
@@ -60,7 +94,7 @@
                         </a>
                                                 </li>
                                                 <li class="next">
-                                                    <a (click)="nextStep()" [class.disabled]="activeStep.submitted && !activeStep.valid" class="btn btn-lg txt-color-darken"> 下一步
+                                                    <a (click)="nextStep()" [class.disabled]="activeStep.submitted && !activeStep.valid" class="btn btn-lg txt-color-darken"> {{getNextLabel()}}
                         </a>
                                                 </li>
                                             </ul>

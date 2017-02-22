@@ -37,3 +37,7 @@ body {
 .date-control {
     display: block;
 }
+
+.ui-radiobutton-label {
+    font-size: 17px;
+}

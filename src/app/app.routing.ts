@@ -16,8 +16,6 @@ export const routes: Routes = [
     children: [
       {
         path: '', redirectTo: 'certificates/search', pathMatch: 'full',
-
-
       },
       // {path: 'home', loadChildren: 'app/+home/home.module#HomeModule',data:{pageTitle: 'Home'}},
       {path: 'certificates', loadChildren: 'app/+certificates/certificates.module#CertificatesModule',data:{pageTitle: '证书管理'}},

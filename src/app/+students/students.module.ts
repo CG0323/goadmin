@@ -4,7 +4,7 @@ import { studentsRouting } from './students.routing';
 import {SmartadminModule} from "../shared/smartadmin.module";
 import {SmartadminWizardsModule} from "../shared/forms/wizards/smartadmin-wizards.module";
 import {STUDENTS_COMPONENTS} from "./components/index";
-import {DataTableModule,SharedModule,CalendarModule,DropdownModule} from 'primeng/primeng';
+import {DataTableModule,SharedModule,DropdownModule,RadioButtonModule} from 'primeng/primeng';
 import {StudentService} from './services/student.service';
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import {StudentService} from './services/student.service';
     SmartadminWizardsModule,
     DataTableModule,
     SharedModule,
-    CalendarModule,
+    RadioButtonModule,
     DropdownModule
   ],
   declarations: [STUDENTS_COMPONENTS],

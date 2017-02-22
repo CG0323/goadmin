@@ -13,7 +13,7 @@
                     <h2>学员列表</h2>
                 </header>
                 <button class="btn btn-primary" style="margin:4px 4px 4px 4px" (click)="addModal.show()"><i class="fa fa-plus"></i> 添加学员</button>
-                <button *ngIf="selectedStudents.length > 0" class="btn btn-primary" style="margin:4px 4px 4px 4px" (click)="activate()"><i class="fa fa-dollar"></i> 批量激活</button>
+                <button [disabled]="selectedStudents.length == 0" class="btn btn-primary" style="margin:4px 4px 4px 4px" (click)="activate()"><i class="fa fa-cny"></i> 批量激活</button>
                 <p-dataTable #dt [value]="students" [rows]="20" [paginator]="true" [pageLinks]="3" [(selection)]="selectedStudents">
                     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
                     <p-column field="username" header="用户名" [filter]="true" filterPlaceholder="搜索"></p-column>
@@ -23,6 +23,9 @@
                     <p-column field="status" header="账户状态" [filter]="true" [style]="{'overflow':'visible'}" filterMatchMode="equals">
                         <template pTemplate="filter" let-col>
                             <p-dropdown [options]="statusList" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+                        </template>
+                        <template let-student="rowData" let-i="rowIndex" pTemplate="body">
+                            <span [class]="getStatusClass(student.status)">{{student.status}}</span>
                         </template>
                     </p-column>
                     <p-column field="expired_at" header="有效期至">

@@ -27,6 +27,11 @@ export class StudentService {
       .map(res=>res.json())
   }
 
+  updateStudent(student:Student):Observable<any>{
+    return this.authHttp.put(AppConfig.LOGIN_BASE + student._id, student)
+      .map(res=>res.json())
+  }
+
   deleteStudent(id:string):Observable<any>{
     return this.authHttp.delete(AppConfig.LOGIN_BASE  + id)
       .map(res => res.json())
